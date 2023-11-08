@@ -10,8 +10,8 @@ const webflow = new Webflow({
 async function listSites() {
   try {
     const sites = await webflow.get('/sites');
-    console.log('Sites:', sites);
-    return sites;
+    console.log('Sites:', sites.data);
+    return sites.data.sites;
   } catch (error) {
     console.error('Error listing sites:', error);
   }
@@ -21,8 +21,8 @@ async function listSites() {
 async function getSiteDetails(siteId) {
   try {
     const site = await webflow.get(`/sites/${siteId}`);
-    console.log('Site Details:', site);
-    return site;
+    console.log('Site Details:', site.data);
+    return site.data;
   } catch (error) {
     console.error('Error getting site details:', error);
   }
@@ -31,9 +31,9 @@ async function getSiteDetails(siteId) {
 // Function to list pages
 async function listPages(siteId) {
     try {
-      const pages = await webflow.get('/pages');
-      console.log('Pages:', pages);
-      return pages;
+      const pages = await webflow.get(`sites/${siteId}/pages`);
+      console.log('Pages:', pages.data);
+      return pages.data.pages;
     } catch (error) {
       console.error('Error listing pages:', error);
     }
