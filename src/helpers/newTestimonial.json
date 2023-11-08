@@ -1,0 +1,11 @@
+{
+    "name": "Claire Dubois",
+    "slug": "claire-dubois",
+    "headshot": {
+      "url": "https://images.nappy.co/uploads/large/475616115983312apy4ctito4208vnx6zssdfnufhl3x7r8vmw32jbo42bip4f2iuxlxy3vfjfq3ywyz5cznvd06gknhjx1sdsmn8izgumzt4uauzs.jpg?auto=format&w=1280&q=75",
+      "alt": "Portrait de Claire Dubois"
+    },
+    "alt-text-for-images": "Portrait de la cliente Claire Dubois.",
+    "years-as-a-customer": "Cliente depuis 3 ans",
+    "quote": "La conformité aux réglementations de l'Autorité des marchés financiers est cruciale pour notre entreprise. L'expertise d'AstralFund en matière de réglementation française nous a permis de naviguer avec succès dans ces eaux complexes."
+}

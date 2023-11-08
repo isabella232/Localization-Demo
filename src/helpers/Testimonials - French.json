@@ -1,0 +1,50 @@
+[
+  {
+    "id": "65427cf400e02b306eaa04d0",
+    "cmsLocaleId": "65427cf400e02b306eaa049f",
+    "lastPublished": "2023-11-01T18:53:33.061Z",
+    "lastUpdated": "2023-09-28T15:38:17.472Z",
+    "createdOn": "2023-09-05T21:30:06.481Z",
+    "isArchived": false,
+    "isDraft": true,
+    "fieldData": {
+      "name": "Naomi Bell",
+      "slug": "naomi-bell",
+      "alt-text-for-images": "Portrait de la cliente Naomi.",
+      "years-as-a-customer": "Cliente depuis 4 ans",
+      "quote": "J'ai toujours eu du mal avec la planification financière, mais les conseils personnalisés d'AstralFund ont été une bouée de sauvetage."
+    }
+  },
+  {
+    "id": "65427cf400e02b306eaa04ce",
+    "cmsLocaleId": "65427cf400e02b306eaa049f",
+    "lastPublished": "2023-11-01T18:53:33.061Z",
+    "lastUpdated": "2023-09-22T14:14:27.435Z",
+    "createdOn": "2023-09-05T21:29:14.700Z",
+    "isArchived": false,
+    "isDraft": false,
+    "fieldData": {
+      "quote": "Les assistants virtuels d'AstralFund sont une bouffée d'air frais dans le service client. Rapides, efficaces et toujours disponibles.",
+      "name": "Amanda Orr",
+      "slug": "amanda-orr",
+      "alt-text-for-images": "Portrait de la cliente Amanda.",
+      "years-as-a-customer": "Cliente depuis 5 ans"
+    }
+  },
+  {
+    "id": "65427cf400e02b306eaa04cc",
+    "cmsLocaleId": "65427cf400e02b306eaa049f",
+    "lastPublished": "2023-11-01T18:53:33.061Z",
+    "lastUpdated": "2023-09-22T14:14:48.223Z",
+    "createdOn": "2023-09-05T21:28:20.260Z",
+    "isArchived": false,
+    "isDraft": false,
+    "fieldData": {
+      "quote": "En tant qu'enthousiaste de la technologie, je suis ravi de l'innovation continue d'AstralFund. Ils sont toujours à la pointe dans l'industrie bancaire.",
+      "name": "David Adjaye",
+      "slug": "david-adjaye",
+      "alt-text-for-images": "Portrait du client David",
+      "years-as-a-customer": "Client depuis 2 ans"
+    }
+  }
+]
