@@ -57,11 +57,11 @@ import Webflow from "webflow-api"
 
 #### In this step we'll retrieve the site and locale identifiers, so that we can make locale specific requests to our site
 
-- [ ] Make sure you have a valid Bearer Key that is authenticated for your new site. You can easily do this by authenticating through our API reference docs. Once you have your Bearer Key, you can store it in your .env file as `WEBFLOW_API_TOKEN`
+- [ ] **Make sure you have a valid Bearer Key** that is authenticated for your new site. You can easily do this by authenticating through our API reference docs. Once you have your Bearer Key, you can store it in your .env file as `WEBFLOW_API_TOKEN`
 
 ![Get Bearer Key](https://files.readme.io/68c9547-Screenshot_2023-11-06_at_11.15.47_AM.png)
 
-- [ ]  Initialize the API using the [Webflow Javascript SDK](https://github.com/webflow/js-webflow-api)
+- [ ]  **Initialize the API** using the [Webflow Javascript SDK](https://github.com/webflow/js-webflow-api)
 
 ```
     const webflow = new Webflow(
@@ -70,14 +70,13 @@ import Webflow from "webflow-api"
       });
 ```
 
-- [ ] Call the List Sites endpoint to find your `siteId` and `locale` information
-- [ ] Extract the localeId for both English and French from the Site object
+- [ ] **Call the List Sites** endpoint to find your `siteId` and `locale` information
+- [ ] **Extract the localeId** for both English and French from the Site object
 
   - Notice the `locales` parameter, which returns a `primary` locale, and an array of `secondary` locales
   - Each locale has useful information like the language, location, and more.
   - In addition to a specific `localeId`, each locale also has a `cmsLocaleId`  
-    Store these IDs as variables for later use.
-- [ ] Store these IDs as variables for later use.
+- [ ] **Store these IDs** as variables for later use.
 
 ```javascript
  // List sites and get the Astral Fund site's details
@@ -85,7 +84,7 @@ import Webflow from "webflow-api"
     const astralFundSite = sites.find(site => site.displayName.includes("AstralFund"));
     const siteId = astralFundSite.id;
     const siteDetails = await await webflow.get(`/sites/${siteId}`);
-		console.log(siteDetails)
+	console.log(siteDetails)
 
 
     // Extract and store locale IDs
@@ -111,14 +110,14 @@ import Webflow from "webflow-api"
 
 ```
 
-- [ ] **Get the content of the Primary Locale **using the [Read DOM ](https://dash.readme.com/go/webflow-data?redirect=%2Fv2.0.0-beta%2Freference%2Fread-dom) endpoint. This will return all localizable content from a static page, which we can then translate for our locale-specific page.
+- [ ] **Get the content of the Primary Locale** using the [Read DOM ](https://dash.readme.com/go/webflow-data?redirect=%2Fv2.0.0-beta%2Freference%2Fread-dom) endpoint. This will return all localizable content from a static page, which we can then translate for our locale-specific page.
 
 > 📘 
 > 
 > As of Sep 22, 2023 , we only support writing to Text and Rich Text to the DOM. We do not support updating images via this API yet.
 
-- [ ] **Modify the content **to include localized versions of the nav bar, contact content, form, and footer. We’ve provided a localized DOM for you with `./helpers/Contact Us - French.json`
-- [ ] **Update the content **of the french locale by making a `POST` request to the [Update DOM](https://docs.developers.webflow.com/v2.0.0-beta/reference/update-dom) endpoint, entering the `localeId` in the `locale` query parameter.
+- [ ] **Modify the content** to include localized versions of the nav bar, contact content, form, and footer. We’ve provided a localized DOM for you with `./helpers/Contact Us - French.json`
+- [ ] **Update the content** of the french locale by making a `POST` request to the [Update DOM](https://docs.developers.webflow.com/v2.0.0-beta/reference/update-dom) endpoint, entering the `localeId` in the `locale` query parameter.
 
 ```javascript JavaScript
   // Get the DOM for the Contact Us page in English and translate to French
@@ -132,7 +131,7 @@ import Webflow from "webflow-api"
 
 #### Now, let's get page metadata to update the SEO and OpenGraph data
 
-- [ ] **Retrieve the primary page's SEO data **via a `GET` request to the [Get Page Metadata ](https://docs.developers.webflow.com/v2.0.0-beta/reference/get-page-metadata)endpoint
+- [ ] **Retrieve the primary page's SEO data** via a `GET` request to the [Get Page Metadata ](https://docs.developers.webflow.com/v2.0.0-beta/reference/get-page-metadata)endpoint
 - [ ] **Translate** the data so that it's relevant for the French audience. We’ve provided localized information for you with `./helpers/seoData.json`
 - [ ] **Update the SEO Data** for the french locale' via a `POST` request to [Update Page Metadata](<>)endpoint. Be sure to enter the `localeId` in the `locale` query parameter.
 
@@ -148,7 +147,7 @@ import Webflow from "webflow-api"
 
 #### To demonstrate AsrtralFund’s commitment to the French market, we'll translate the existing testimonials, and create a French-specific testimonial from a French regulatory authority.
 
-- [ ] **Get existing testimonials **and translate them using our provided translation.
+- [ ] **Get existing testimonials** and translate them using our provided translation.
 - [ ] For each translated testimonial, **update the CMS item** via the [Update Collection Item](ref:update-item) endpoint. Be sure to include `cmsLocaleId` in the body of the request. If you're using our translated data, one of the testimonials will be set to draft, so that we can highlight the French-only testimonial that we'll create in the next step.
 
 ```javascript
