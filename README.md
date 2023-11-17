@@ -30,9 +30,9 @@ In this tutorial, we'll use a mockup site for a fintech application, AstralFund,
 ### Localization in Action
 AstralFund, an imaginary bank for this example, serves two locales, the United States and France. To properly address each market’s needs, the bank needs to localize content throughout the site. In the example, we’ve localized some content, but we’ll walk through how to localize the entire site in this tutorial.
 
-| ![English Hero Image]('./../src/public/englishHero.png') | ![French Hero Image]('./../src/public/frenchHero.png') |
+| ![English Hero Image]('src/public/englishHero.png') | ![French Hero Image]('src/public/frenchHero.png') |
 | -------- | ------- |
-| ![English Testimonial Image]('./../src/public/englishTestimonial.png') | ![French Testimonial Image]('./../src/public/frenchTestimonial.png') |
+| ![English Testimonial Image]('src/public/englishTestimonial.png') | ![French Testimonial Image]('src/public/frenchTestimonial.png') |
 | **Primary Locale: United States 🇺🇸**  | **Secondary Locale: France 🇫🇷**  |
 The site's primary locale is set to the United States with content in English. | A secondary locale for France is available, with the homepage localized in French. Notice, the localized image and the decimals replaced by commas. However, some content, like the testimonials, still needs to be localized. |
 
