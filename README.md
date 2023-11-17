@@ -36,19 +36,6 @@ AstralFund, an imaginary bank for this example, serves two locales, the United S
 | **Primary Locale: United States 🇺🇸**  | **Secondary Locale: France 🇫🇷**  |
 The site's primary locale is set to the United States with content in English. | A secondary locale for France is available, with the homepage localized in French. Notice, the localized image and the decimals replaced by commas. However, some content, like the testimonials, still needs to be localized. |
 
-### Step 1: Clone Site and Identify Localization Opportunities
-- [ ] Clone the [AstralFund site](https://webflow.com/design/astralfund-919afdc1091df68b8dc1347f952a) to your Webflow account, and add it to a workspace used for testing.
-- [ ] Publish the site to set it live.
-- [ ] Navigate to the French version to see the localized French homepage.
-- [ ] Navigate to the Contact page in French. Note the content that is not yet localized. We’ll fix this by localizing the navigation bar, contact content, form, footer, and SEO data.
-
-### Step 2: Retrieve Locale Information
-- [ ] Make sure you have a valid Bearer Key in order to make API calls. You can easily do this by authenticating through our API reference docs. Once you have your Bearer Key, store it in your `.env` file as `WEBFLOW_API_TOKEN`
-
-![Authenticate via our API Docs](./src/public/bearerkey.png)
-- [ ] Initialize the API using the [Webflow Javascript SDK](https://github.com/webflow/js-webflow-api)
-
-
 ### Step 1: Clone AstralFund and Identify Localization Opportunities
 
 - [ ] **Clone the Example Repository** to get the localized example data. There's an full example of all the steps below in `index.js`, but if you want to follow along step by step create a new file called `localization.js` with the following imports. Here we're importing the translated content we'll need to localize our site, and the Webflow Javascript SDK.
@@ -72,21 +59,7 @@ import Webflow from "webflow-api"
 
 - [ ] Make sure you have a valid Bearer Key that is authenticated for your new site. You can easily do this by authenticating through our API reference docs. Once you have your Bearer Key, you can store it in your .env file as `WEBFLOW_API_TOKEN`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/68c9547-Screenshot_2023-11-06_at_11.15.47_AM.png",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
-}
-[/block]
-
+![Get Bearer Key](https://files.readme.io/68c9547-Screenshot_2023-11-06_at_11.15.47_AM.png)
 
 - [ ]  Initialize the API using the [Webflow Javascript SDK](https://github.com/webflow/js-webflow-api)
 
