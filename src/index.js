@@ -3,7 +3,7 @@ import localizedDOM from "./helpers/Contact Us - French.json" assert {type: "jso
 import localizedMetadata from "./helpers/seoData.json" assert {type: "json"}// Localized SEO Data
 import frenchTestimonials from "./helpers/Testimonials - French.json" assert {type: "json"}// Localized Testimonials
 import newTestimonial from "./helpers/newTestimonial.json" assert {type: "json"} // New French Testimonial
-import Webflow from "webflow-api"
+import WebflowClient from "webflow-api"
 
 // Importing some helper functions. Be sure to check them out in "helpers.js" to see how they work.
 import {
@@ -27,9 +27,8 @@ async function run() {
     /* 🔮 Step 3: Retrieve Locale Information 🔮 */
 
     // Initialize the API.
-    const webflow = new Webflow(
-      { token: process.env.WEBFLOW_API_TOKEN,
-        beta: true
+    const webflow = new WebflowClient(
+      { accessToken: process.env.WEBFLOW_API_TOKEN,
       }
       );
     
