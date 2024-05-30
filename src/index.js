@@ -1,84 +1,94 @@
 // We've gone ahead and translated most of the Conent we need in the files below
-import localizedDOM from "./helpers/Contact Us - French.json" assert {type: "json"}// Localized "Contact Us DOM
-import localizedMetadata from "./helpers/seoData.json" assert {type: "json"}// Localized SEO Data
-import frenchTestimonials from "./helpers/Testimonials - French.json" assert {type: "json"}// Localized Testimonials
-import newTestimonial from "./helpers/newTestimonial.json" assert {type: "json"} // New French Testimonial
-import WebflowClient from "webflow-api"
-
-// Importing some helper functions. Be sure to check them out in "helpers.js" to see how they work.
-import {
-  listSites,
-  getSiteDetails,
-  listPages,
-  getDOM,
-  updateDOM,
-  getPageMetadata,
-  updatePageMetadata,
-  getCmsCollections,
-  getCmsItems,
-  updateLocalizedCmsItems,
-  createFrenchTestimonial,
-} from "../src/helpers/helpers.js"
-
+import localizedDOM from "./helpers/Contact Us - French.json" assert { type: "json" }; // Localized "Contact Us DOM
+import localizedMetadata from "./helpers/seoData.json" assert { type: "json" }; // Localized SEO Data
+import frenchTestimonials from "./helpers/Testimonials - French.json" assert { type: "json" }; // Localized Testimonials
+import newTestimonial from "./helpers/newTestimonial.json" assert { type: "json" }; // New French Testimonial
+import { WebflowClient } from "webflow-api";
+import dotenv from "dotenv";
 
 async function run() {
   try {
-
-    /* 🔮 Step 3: Retrieve Locale Information 🔮 */
+    /* 🔮 Step 1: Retrieve Locale Information 🔮 */
 
     // Initialize the API.
-    const webflow = new WebflowClient(
-      { accessToken: process.env.WEBFLOW_API_TOKEN,
-      }
-      );
-    
-    // List sites and get the Astral Fund site's details
-    const sites = await listSites();
-    const astralFundSite = sites.find(site => site.displayName.includes("AstralFund"));
-    const siteId = astralFundSite.id;
-    const siteDetails = await getSiteDetails(siteId);
+    dotenv.config();
+    const token = process.env.WEBFLOW_API_TOKEN;
+    const webflow = new WebflowClient({ accessToken: token });
 
+    // List sites and get the Astral Fund site's details
+    const sites = await webflow.sites.list();
+    const astralFundSite = sites.sites.find((site) =>
+      site.displayName.includes("AstralFund")
+    );
+    const siteId = astralFundSite.id;
+    const siteDetails = await webflow.sites.get(siteId);
 
     // Extract and store locale IDs
     const locales = siteDetails.locales;
     const secondaryLocaleId = locales.secondary[0].id; // French is the first secondary locale
-    const secondaryCmsLocaleId = locales.secondary[0].CmsId
+    const secondaryCmsLocaleId = locales.secondary[0].CmsId;
 
-    /* 🔮 Step 4: Localize "Contact Us" page 🔮 */
+    /* 🔮 Step 2: Localize "Contact Us" page 🔮 */
 
     // Get the Page Info for "Contact Us"
-    const pages = await listPages(siteId)
-    const contactPage = pages.find(page => page.title.includes("Contact"));
-    const contactPageId = contactPage.id
+    const pages = await webflow.pages.list(siteId);
+    const contactPage = pages.pages.find((page) =>
+      page.title.includes("Contact")
+    );
+    const contactPageId = contactPage.id;
 
     // Get the DOM for the Contact Us page in English and translate to French
-    const primaryContactPageDom = await getDOM(contactPageId);
+    const primaryContactPageDom = await webflow.pages.getContent(contactPageId);
 
     // Update the Contact Us page DOM with French content
-    await updateDOM(contactPageId, localizedDOM, secondaryLocaleId);
+    await webflow.pages.updateStaticContent(
+      contactPageId,
+      localizedDOM,
+      secondaryLocaleId
+    );
 
-    /* 🔮 Step 5: Localize SEO Data 🔮 */
+    /* 🔮 Step 3: Localize SEO Data 🔮 */
 
     // Get page metadata with localized SEO data
-    const pageMetadata = await getPageMetadata(contactPageId);
-    await updatePageMetadata(contactPageId, localizedMetadata);
+    const pageMetadata = await webflow.pages.getMetadata(contactPageId);
+    await webflow.pages.updatePageSettings(contactPageId, localizedMetadata);
 
-    /* 🔮 Step 6: Manage Testimonials via th CMS 🔮 */
+    /* 🔮 Step 4: Manage Testimonials via th CMS 🔮 */
 
     // Work with CMS data for testimonials
-    const collections = await getCmsCollections(siteId);
-    const testimonialsCollectionId = collections.find(collection => collection.displayName === 'Testimonials').id;
-    const testimonials = await getCmsItems(testimonialsCollectionId);
+    const collections = await webflow.collections.list(siteId);
+    const testimonialsCollectionId = collections.find(
+      (collection) => collection.displayName === "Testimonials"
+    ).id;
+    const items = await webflow.collections.items.listItems(
+      testimonialsCollectionId
+    );
 
     // Translate Testimonials, setting the first one to draft
-    const localizedItems = await updateLocalizedCmsItems(testimonialsCollectionId, frenchTestimonials, secondaryCmsLocaleId)
+    try {
+      for (const [index, value] of items.entries()) {
+        const updatedItem = await webflow.collections.items.updateItemLive(
+          testimonialsCollectionId,
+          frenchTestimonials[index],
+          secondaryCmsLocaleId
+        );
+        console.log(`Item:`, updatedItem.data);
+      }
+    } catch (error) {
+      console.error(`Error updating CMS items:`, error);
+      throw error;
+    }
 
     // Create a French-Only Testimonial
-    await createFrenchTestimonial(testimonialsCollectionId, newTestimonial, secondaryCmsLocaleId);
+    await webflow.collections.items.createItem(
+      testimonialsCollectionId,
+      newTestimonial,
+      secondaryCmsLocaleId
+    );
 
-    console.log('Localization process completed successfully.');
+    console.log("Localization process completed successfully.");
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error("An error occurred:", error);
   }
 }
 
